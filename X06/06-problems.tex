@@ -1,0 +1,166 @@
+\documentclass[
+	english,
+	fontsize=10pt,
+	parskip=half,
+	titlepage=true,
+	DIV=12
+]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[T1]	{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{csquotes}
+
+\usepackage{hyperref}
+
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage[bf]{caption}
+	\captionsetup{format=plain}
+
+\newcommand*{\tabcrlf}{\\ \hline}
+
+\usepackage{amsmath}
+
+\usepackage{minted}
+	\usemintedstyle{friendly}
+
+\newcommand*{\inPy}[1]{\mintinline{python3}{#1}}
+\newcommand*{\ie}{i.\;e. }
+\newcommand*{\eg}{e.\;g. }
+
+\newcommand{\thus}{\ensuremath{\rightarrow}}
+
+\begin{document}
+
+\part*{Python Problems 06, Spring 2021}
+In this problem paper, we'll try to work on one bigger, contiguous problem. We will recreate the basis for a turn based adventure game\footnote{More precisely, we will recreate the core gameplay of \emph{Fortune and Glory}, a wonderfully nerdy game in the vain of \emph{Indiana Jones}}. Several players stand on the verge of a jungle in which there is a temple with a hidden treasure. The players race towards the temple, trying to be the first to find it. On their way, they have to pass tests and they will find useful items that help them come closer to their goal. If a player passes a test, they gain a new item; if they fail to do so, they loose health.
+
+The scope is a bit bigger than usual, so you need only to be finished by tomorrow (course day 7). There will be a short problem paper tomorrow, too, but you can use about one and a half exercise units to work on this project.
+
+The following tasks will guide you step by step to realizing this game concept.
+
+\emph{Hint}:\\
+In the completed game, randomness will play a big role. However, this is difficult to debug. To understand an error, we usually need to be able to run the same code multiple times. For this reason, work with fixed values first. Only if everything works as intended and is tested for multiple input values, add the code for randomness (such as dice rolls).
+
+\emph{Hint}:\\
+You'll need user input on some occasions. Experience shows that it takes a lot of time to enter and re-enter the same lines of data again and again. Like with randomness, I advise you to first work with fixed inputs and add user interfaces later.
+
+\section{Player: Class- and Instance Attributes (3 P)}
+First, we need to analyze the characteristics of our game.
+
+Each player is described by their name, some integers telling their health, strength, intelligence, speed and charisma levels. All these values should be in the range 3-6. Further, a player owns a backpack, \ie a list of items they carry with them. There will be situations where the players are hindered in their progress and they loose a turn. For this reason, we need a \inPy{bool} variable \texttt{looseTurn}. The path from the verge of the jungle to the temple takes a fixed number of steps. Thus, one attribute of our class needs to portray the \texttt{progress} a player has made, \ie the number of steps taken.
+
+The backpack doesn't hold an infinite amount of objects. For reasons of fairness, every player has an backpack of equal size $N$, \eg $N=5$.
+
+We start with implementing a class \texttt{Player} that should be able to portray the above characteristics. Consider which of the above ideas should be class attributes and which should be instance attributes. Then write the basic code for the class \texttt{Player}, \ie program class properties and assign instance properties in the method \inPy{__init__}.
+
+\textbf{\emph{Optionally} (+1 P)} you can implement the following idea:\\
+The properties of all players should be subject to random fluctuations around some fixed value, \ie:
+\begin{minted}{python3}
+XXX.strength = XXX.baseStrength \
+             + random.randint(-XXX.fluctuationStrength, +XXX.fluctuationStrength)
+\end{minted}
+What do you need to put instead of \texttt{XXX}?
+
+\section{Test: Instance Attributes and List of Tests (2 P)}
+Next we want to portray in code what we mean when we speak about a test.
+
+The player should first be asked to make a yes/no decision. Depending on this choice, one of two tasks will be posed.
+
+A task challenges the player to show their prowess in a given category, \eg speed. The task has a certain \enquote{cost} in that category that the player will have to \enquote{pay}. (E.\,g. the situation might demand the player runs away fast enough. How fast they need to be is given in this cost value.) In the board game, we would roll a number of dice, and the sum of the pips is how good the player performs in the test at hand. If the sum of pips is greater than the cost, the test is pased. The number of dice rolled is equal to the character attribute. E.\,g. if a player has a speed value of 5, they will roll 5 dice in a speed test.
+
+A test has some text that is shown to the player before they face the true test. Such a text might be:
+\begin{center}
+	\emph{The deep jungle suddenly ends on a cliff. In front of you, a chasm opens up and a deep gorge stands between you and the temple. There is a narrow and shaky suspension bridge over the gorge. Do you step on the bridge?}
+\end{center}
+
+Furthermore, there should be some text in memory that will be displayed if the player answers with \emph{yes}, \eg:
+\begin{center}
+	\emph{Half way over the bridge, you hear the hissing sound of ropes disintegrating: one of the ropes holding the bridge is about to snap! Run for your life!}
+\end{center}
+
+and of course, some text that is to be shown if the answer was \emph{no}, \eg:
+\begin{center}
+	\emph{You try to find another way across the gorge, which takes a lot of time. Skip one turn.}
+\end{center}
+
+Obviously, \emph{Run for your life!} implies this is goint to be a speed test. Hence, we need to add the attributes\\
+\inPy{self.yesCategory = "speed"} and \inPy{self.yesCategory = "skipTurn"},\\
+together with the associated costs:\\
+\inPy{self.yesCost = 5} and \inPy{self.noCost = 0}.
+
+Consider the following approach:
+\begin{minted}[linenos]{python}
+class Test :
+    def __init__(self,
+                 textDecision,
+                 yesText, yesCategory, yesCost,
+                 noText ,  noCategory,  noCost) :
+        # (your code here)
+\end{minted}
+
+and fill in the missing bits. Why do we have \emph{no} class attributes in \texttt{Test}?
+
+Now, on module level, create a \inPy{list} with three instances of \texttt{Test}. (Focus on the programming aspect here. Keep the texts short; in a pinch, just use \inPy{"text1"}, \inPy{"text2"}, ... You can add creative details later on.)
+
+Test your code for whether or not the desired data are actually stored in the intended way:
+\begin{minted}[linenos]{python}
+tests = [...]    # (Your code here)
+
+for test in tests :
+    print(test.textDecision)
+\end{minted}
+
+\section{Item: Instance Attributes (2 P)}
+Transfer the considerations from before by implementing a class \texttt{Item}.
+
+An item should have a name (\eg \emph{The Holy Hand Grenade of Antioch}). A player who posesses this item gains a bonus of 3 points on their strength.
+
+Represent the underlying characteristics in a class. Create another \inPy{list} and put three instances of \texttt{Item} in it. (Again, focus on coding, add interesting texts later.)
+
+
+\section{Player: Method \texttt{\_\_str\_\_} (1 P)}
+Write a method \inPy{__str__}, such that you get a nice to read overview of an instance of \texttt{Player}. For example, the line \inPy{print(player1)} should create output like the following:
+
+\begin{minted}{text}
+PLAYER:
+        name                : Victoria
+        steps toward success: 0
+        health              : 3
+        strenght            : 10
+        intelligence        : 19
+        speed               : 11
+        charisma            : 6
+        in their backpack:
+        * berret (charisma +2)
+        * bullwhip (strength +1)
+\end{minted}
+
+\section{Player: Method \texttt{performTest} (3 P)}
+Now, write a method \texttt{performTest} in the class \texttt{Player}. This method should take an instance of \texttt{Test} as an argument, and run the interaction with the human players. That is, it should print the yes-or-no text on screen, ask for an answer and, depending on that answer, pose the yes- or the no-task, roll the correct number of dice and evaluate the result. On success, a random item should be added to the backpack; on fail, a health point is to be deduced.
+
+You may ignore bonus of the items in the backpack.
+
+\emph{Hint}:\\
+It will be advantageous to split this into several methods that are then called by \texttt{performTest}.
+
+\emph{Hint}:\\
+To roll the dice, you will need to \inPy{import random}. Look up \inPy{help(random.choice)} or \inPy{help(random.randint)} to implement this.
+
+\textbf{\emph{Optionally}}, you can make it such that the boni of items in the backpack are respected.\\
+\textbf{\emph{Optionally}}, you can test whether or not the rucksack has enough space for a new element. If no, the player may decide which object to discard.\\
+\textbf{\emph{Optionally}}, you can write your code such that it is not possible for a player to possess the same item twice.
+
+\section{OPTIONALLY: Playable Game (+3 P)}
+Combine the components you have written so far to get a complete, playable game.
+
+\section{OPTIONALLY: Any Add-Ons You Like}
+Think of additional game mechanics and try to implement them.
+
+You may use this code as a basis for your final exam project. Your additions should then be of noteworthy complexity. You might want to implement items that can break, items that have a prolonged effect, a fight mechanism, a team player mode, different rooms with effects, recovery mechanisms, ...
+\end{document}

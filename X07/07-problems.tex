@@ -1,0 +1,87 @@
+\documentclass[
+	english,
+	fontsize=10pt,
+	parskip=half,
+	titlepage=true,
+	DIV=12
+]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[T1]	{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{csquotes}
+
+\usepackage{hyperref}
+
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage[bf]{caption}
+	\captionsetup{format=plain}
+
+\newcommand*{\tabcrlf}{\\ \hline}
+
+\usepackage{amsmath}
+
+\usepackage{minted}
+	\usemintedstyle{friendly}
+
+\newcommand*{\inPy}[1]{\mintinline{python3}{#1}}
+\newcommand*{\ie}{i.\;e. }
+\newcommand*{\eg}{e.\;g. }
+
+\newcommand{\thus}{\ensuremath{\rightarrow}}
+
+\begin{document}
+
+\part*{Python Problems 07, Spring 2021}
+\section{Selection Sort (1 P)}
+Implement the \emph{Selection Sort Algorithm}\footnote{Of course, in \enquote{real life}, you would simply use Python's \inPy{list.sort}. This isn't only easier to use -- Python's sorting algorithm has way better runtime behaviour, \ie it's much faster.}
+The algorithm is easy to implement and we repeat the ideas generally needed for coding. Follow these steps to implement the algorithm:
+\begin{itemize}
+\item Find the smallest element in a given list
+\item Swap this smallest element with the first element of the list
+\item Now look for the \emph{second smallest} element in the list, and swap it with the \emph{second} element in the list.
+\item Continue like that until the list is completely sorted
+\end{itemize}
+
+Implement your solution as a function. Your solution should be applicable like that:
+\mint{python}{selectionSort(unsortedList)}
+where \texttt{selectionSort} is the name of your function, and \texttt{unsortedList} is a list of random numbers provided by you. After the call, \texttt{unsortedList} should hold a \emph{sorted} list.
+
+\emph{Hints:}\\
+\begin{itemize}
+\item A \emph{triangle swap} is unnecessary; you can simply swap the content of two variables \texttt{a, b} by typing:
+	\mint{python}{a, b = b, a}
+\item Look up \texttt{help(random.sample)} to create a list of random numbers.
+\item You can combine \inPy{enumerate} and \inPy{min} to find the \emph{index} of the smallest element in a list with a single line of code. To do so, use the
+	technique \emph{list comprehension}\\
+	Of course, there are other means of finding the index of the smallest element in a list which you may find less complicated to use.+
+\end{itemize}
+
+
+\section{Integral (II) (3 P)}
+Write a function that takes a function as an argument, and that \emph{returns a function}. The returned function should compute an approximation for the antiderivative, \ie the integral at a given point \texttt{x}. An optional argument \texttt{N} should be usable to set the accuracy of the approximation.
+In other words, your function \texttt{antiderivative} should be usable in the following way:
+
+\begin{minted}[linenos]{python3}
+import math
+
+# def antiderivative (f, N = 1000)
+#     your code here
+
+F = antiderivative( math.sin )
+
+print( F(math.pi) )    # should output approximately 2.0
+\end{minted}
+
+\emph{Hint}:\\
+You can use most of your code from sheet 5, task 4.
+
+\emph{Hint}:\\
+As lower boundary of your integray, use the value \inPy{0}
+
+\end{document}
