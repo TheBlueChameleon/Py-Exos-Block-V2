@@ -58,6 +58,9 @@ else :
 #   can be found. Otherwise, a ValueError is triggered (this will be covered 
 #   later in detail. In brief: program execution is aborted with an error 
 #   message)
+# pop retuns and deletes the last element of a list, if called with no argument.
+#   if an argument is provided, it must be an integer and specifies the index of
+#   the element to delete and return
 # clear deletes all objects in a list
 
 # This can be illustrated as follows
@@ -75,8 +78,15 @@ print(dir(myList))
 
 print( math.factorial(4) )       # Output 24 = 4 * 3 * 2 * 1
 print( math.radians(180) )       # Output 3.141592653589793 (also pi)
+
 print( myList.index("Joe") )     # Output 1 (Index of 'Joe')
 #print(myList.index("nobody"))   # triggers an error message
+
+print( myList.pop() )            # Output: Hartington
+print( myList )                  # Output: ['Dusky', 'Joe']
+print( myList.pop(0) )           # Output: Dusky
+print( myList )                  # Output: ['Joe']
+
 myList.clear()
 print(myList)                    # Output [] -- myList is still a list!
 

@@ -55,7 +55,7 @@ print("### ELEMENTS IN CLASS LIST:")
 print(dir(myList))
 \end{minted}
 
-Using \inPy{help}, try to find out what \inPy{math.factorial}, \inPy{math.radians}, \inPy{myList.index} and \inPy{myList.clear} are good for. Expand on the above code to validate your assumptions.
+Using \inPy{help}, try to find out what \inPy{math.factorial}, \inPy{math.radians}, \inPy{myList.index}, \inPy{myList.pop} and \inPy{myList.clear} are good for. Expand on the above code to validate your assumptions.
 
 
 \section{Substrings (1 P)}
@@ -132,7 +132,21 @@ Often, the lower and upper summation boundary are omitted. If this is done, it i
 
 
 \section{Counting Characters (3 P)}
-Create a string variable. Determine, how often each character appears in the string.
+Create a string variable and put some text in it. Determine, how often each character appears in the string.
+
+\emph{Example:}\\
+The String \texttt{this is an ex-parrot} contains:
+\begin{center}
+\begin{tabular}{cc|cc}
+(whitespace) & 3x & o            & 1x \\
+-            & 1x & p            & 1x \\
+a            & 2x & r            & 2x \\
+e            & 1x & s            & 2x \\
+h            & 1x & t            & 2x \\
+i            & 2x & x            & 1x \\
+n            & 1x 
+\end{tabular}
+\end{center}
 
 \emph{Hint}: Use a \inPy{set} and a \inPy{dict}.
 

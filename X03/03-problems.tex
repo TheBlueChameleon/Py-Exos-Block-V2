@@ -59,7 +59,7 @@ print(y)
 
 
 \section{FizzBuzz (1 P)}
-In the Game \emph{FizzBuzz}, players count from one upwards. If a number is divisible by three, the player should not name the number, but say \emph{Fizz}. If the number is divisibly by five, players should say \emph{Buzz}. If the number is both, divisible by three and five, players say \emph{Fizzbuzz}. Hence, players count like this:
+In the Game \emph{FizzBuzz}, players count from one upwards. If a number is divisible by three, the player should not name the number, but say \emph{Fizz}. If the number is divisible by five, players should say \emph{Buzz}. If the number is both, divisible by three and five, players say \emph{Fizzbuzz}. Hence, players count like this:
 \begin{center}
 	1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz ...
 \end{center}
@@ -67,7 +67,7 @@ In the Game \emph{FizzBuzz}, players count from one upwards. If a number is divi
 Create a program that puts this sequence on the screen.
 
 \emph{Optionally: (+1 P)}\\
-Write your code such that it can be expanded easily. Instead of placing the output directly on screen, put the numbers/\emph{Fizz}es and \emph{Buzz}es into a data container. Make it such that you can easily change the divisors and the replacement words. Can you find a structure that allows for defining an arbitrary count of divisor-substitution pairs? It \emph{is} possible to write a program, that, by adding one extra line allows to expand the rules to say \emph{Tess} if a number is divisible by 7.
+Write your code such that it can be expanded easily. Instead of placing the output directly on screen, put the numbers/\emph{Fizz}es and \emph{Buzz}es into a data container. Make it such that you can easily change the divisors and the replacement words. Can you find a structure that allows for defining an arbitrary count of divisor-substitution pairs? It \emph{is} possible to write a program, that, by adding only a single extra line, allows to expand the rules to say \emph{Tess} if a number is divisible by 7.
 
 \section{Random/Drunk Walk (1 P)}
 Imagine a drunkard, stumbling down a road. With each step forward, the drunkard will stagger randomly to the left or right.
@@ -106,18 +106,18 @@ The model of a \emph{random walk} or \emph{drunk walk} is often the basis for st
 \includegraphics[width=\linewidth]{MCarlo}
 \caption{\url{https://commons.wikimedia.org/wiki/File:Pi_statistisch.png}}
 \label{fig:MCPI}
-\vspace{-80pt}
+\vspace{-50pt}
 \end{wrapfigure}
 %
 Write a function that approximates the value of $\pi$. To do so, follow these instructions:
 \begin{itemize}
 \item Generate $N$ pairs of positive random numbers $x, y$ between 0 and 1.
 \item For each pair of numbers, compute $x^2 + y^2$
-\item For each pair $(x, y)$ where this expression is less or equal than one, increase a counter.
+\item For each pair $(x, y)$ where this expression is less than or equal to one, increase a counter.
 \item For big $N$, the expression $\frac{\text{counter}}{N}$ approaches $\frac{\pi}{4}$
 \end{itemize}
 
-Write your function such that you can pass an argument \emph{accuracy}. This parameter is to define, how many pairs $(x, y)$ are to be created.
+Write your function such that you can pass $N$ as an argument. This parameter controlls the accuracy of your approximation of $\pi$.
 
 \emph{Note}: You'll need very big values of $N$ to get half-decent results. If your algorithm outputs something like $3.13$, you've probably done everything correctly.
 
