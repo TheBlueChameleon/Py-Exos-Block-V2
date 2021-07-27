@@ -142,3 +142,10 @@ def nFach(f, N, x) :
   return arg
 
 print( nFach(func, 3, 0) )
+
+
+# recursive version:
+
+def nFold(f, N, x) :
+  if N == 0 : return x
+  else      : return f(nFold(f, N-1, x))

@@ -4,11 +4,12 @@
 import math
 import cmath
 
+print("REAL VALUED TREATMENT:")
+
 aStr = input("Please provide a number a:")
 bStr = input("Please provide a number b:")
 cStr = input("Please provide a number c:")
 
-print("REAL VALUED TREATMENT:")
 a = float(aStr)
 b = float(bStr)
 c = float(cStr)
@@ -18,19 +19,26 @@ discr = b**2 - 4 * a * c
 if discr == 0 :
     x = -b / (2*a)
     print("There's one solution: x =", x)
-    
+
 elif discr > 0 :
     x_1 = (-b + math.sqrt(discr)) / (2*a)
     x_2 = (-b - math.sqrt(discr)) / (2*a)
-    
+
     print("There are two solutions:")
     print("  x_1 =", x_1)
     print("  x_2 =", x_2)
+
 else :
     print("There's no solution!")
 
 
+# since now complex coefficients are possible, ask to re-enter them
 print("COMPLEX VALUED TREATMENT:")
+
+aStr = input("Please provide a number a:")
+bStr = input("Please provide a number b:")
+cStr = input("Please provide a number c:")
+
 a = complex(aStr)
 b = complex(bStr)
 c = complex(cStr)
@@ -40,6 +48,7 @@ discr = b**2 - 4 * a * c
 if discr == 0 :
     x = -b / (2*a)
     print("There's one solution: x =", x)
+
 else :
     x_1 = (-b + cmath.sqrt(discr)) / (2*a)
     x_2 = (-b - cmath.sqrt(discr)) / (2*a)
@@ -133,10 +142,16 @@ print(book)
 vector_a = [ 3, 2, 1, 5, 7, 2, -1]
 vector_b = [-7, 3, 7, 5, 6, 8,  1]
 
+# version 1: index based
 result = 0
 for i in range(len(vector_a)) :
   result += vector_a[i] * vector_b[i]
+print(result)
 
+# version 2: using zip
+result = 0
+for x, y in zip(vector_a, vector_b) :
+  result += x * y
 print(result)
 
 # ============================================================================ #
@@ -208,6 +223,17 @@ for i in range(height * width) :
     else                                                : print("*", end="")
     
     if (col == width - 1) : print("")
+
+# ---------------------------------------------------------------------------- #
+# Approach 5
+
+formatstring = "{" + f":^{2 * height + 1}" + "}"
+
+print(formatstring)
+
+for n in range(height) :
+    stars = "*" * (2 * n + 1)
+    print( formatstring.format(stars) )
 
 # ============================================================================ #
 # Problem 9
